@@ -6,9 +6,29 @@ export const fetchAsyncMovies = createAsyncThunk(
 "movies/fetchAsyncMovies",
 async () => {
     const movieText = "Transformers";
-    const response = await movieApi.get(
-    `?apiKey=${APIKey}&s=${movieText}&type=movie`
-    );
+    // const response = await movieApi.get(
+    // `?apiKey=${APIKey}&s=${movieText}&type=movie`
+    // );
+    const response = await movieApi.get(``,{
+        params: {
+            apiKey: APIKey,
+            s: movieText,
+            type: 'movie',
+        }
+    })
+
+    //para optener infor en arrays, obj, etc.
+
+    // const responseRegister = await movieApi.post(`/register`,{
+        //     data: {
+            //         email: '',
+            //         userName: '',
+            //         password: '',
+            //     }
+            // })
+
+            //para manda informacion(formularios)
+
     return response.data;
 }
 );
@@ -67,6 +87,7 @@ extraReducers: {
     },
 },
 });
+
 
 export const { removeSelectedMovieOrShow } = movieSlice.actions;
 export const getAllMovies = (state) => state.movies.movies;
